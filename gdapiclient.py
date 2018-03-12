@@ -57,7 +57,7 @@ def get_external_ipaddress():
     return client.get_external_ip(), 200
 
 
-@app.route('/records/A')
+@app.route('/records/A', methods=['GET'])
 def get_A_records():
     resp = client.get_a_records()
     
