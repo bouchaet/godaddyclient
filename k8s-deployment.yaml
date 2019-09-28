@@ -1,0 +1,53 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: godaddyclient-svc
+  labels:
+    app: godaddyclient
+spec:
+  type: NodePort
+  ports:
+  - port: 5001
+    nodePort: 30555
+    protocol: TCP
+  selector:
+    app: godaddyclient
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: godaddyclient-deployment
+  labels:
+    app: godaddyclient
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: godaddyclient
+  template:
+    metadata:
+       labels:
+         app: godaddyclient
+    spec:
+      containers:
+      - name: godaddyclient-pod
+        image: bouchaet/godaddyclient:arm32v7
+        imagePullPolicy: Always
+        ports: 
+        - containerPort: 5001
+        env:
+        - name: GODADDY_KEY
+          valueFrom:
+            secretKeyRef:
+              name: godaddyclient-secret
+              key: gd_key
+        - name: GODADDY_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: godaddyclient-secret
+              key: gd_secret
+        - name: GODADDY_DOMAIN
+          valueFrom:
+            secretKeyRef:
+              name: godaddyclient-secret
+              key: gd_domain
