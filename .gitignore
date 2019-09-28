@@ -2,3 +2,6 @@
 
 env/
 .vscode/
+
+k8s-secret.yaml
+apisecret.sh

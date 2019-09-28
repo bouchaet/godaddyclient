@@ -1,4 +1,7 @@
 *.pyc
+*.yaml
 
 .vscode/
 env/
+
+apisecret.sh
