@@ -1,6 +1,7 @@
 *.pyc
 
 env/
+env3/
 .vscode/
 
 k8s-secret.yaml

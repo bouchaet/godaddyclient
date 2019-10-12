@@ -5,8 +5,8 @@ import json
 
 
 class GdApiClient(object):
-    def __init__(self, domain):
-        self.domain = domain
+    def __init__(self):
+        self.domain = os.environ.get('GODADDY_DOMAIN') 
         self.key = os.environ.get('GODADDY_KEY')
         self.secret = os.environ.get('GODADDY_SECRET')
         self.apiv1_baseurl = 'https://api.godaddy.com/v1'
@@ -56,7 +56,7 @@ class GdApiClient(object):
 
 
 app = Flask(__name__)
-client = GdApiClient(os.environ.get('GODADDY_DOMAIN'))
+client = GdApiClient()
 
 
 @app.route('/', methods=['GET'])
